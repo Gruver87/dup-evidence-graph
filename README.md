@@ -24,6 +24,7 @@ Dashboard: [`docs/assets/e2e-ecosystem-2026-11-17.png`](docs/assets/e2e-ecosyste
 | [`dup-evidence-graph`](https://github.com/Gruver87/dup-evidence-graph) | Gate #3 Desktop claim map |
 | [`dup-policy-gate`](https://github.com/Gruver87/dup-policy-gate) | Gate #4 order policy (`FUTURES_BLOCK`) |
 | [`dup-radar-news-mcp`](https://github.com/Gruver87/dup-radar-news-mcp) | Companion digest MCP |
+| [`dup-skill-trust-plane`](https://github.com/Gruver87/dup-skill-trust-plane) | Trust control plane + Skill Cards (post-E2E) |
 
 ### Product scan map (this tool)
 
