@@ -1,6 +1,7 @@
 # DUP Evidence Graph
 
 [![ci](https://github.com/Gruver87/dup-evidence-graph/actions/workflows/ci.yml/badge.svg)](https://github.com/Gruver87/dup-evidence-graph/actions/workflows/ci.yml)
+[![release](https://img.shields.io/github/v/release/Gruver87/dup-evidence-graph?display_name=tag)](https://github.com/Gruver87/dup-evidence-graph/releases)
 
 **Org:** [DUP Labs](https://github.com/Gruver87) · **Author:** Uladzimir Dabranski  
 **Version:** `0.1.1` · Fail-closed queryable map of local evidence packs
