@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 from evidence_graph.graph import EvidenceGraph
 from evidence_graph.scan import scan_products
