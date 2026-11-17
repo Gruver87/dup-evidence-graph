@@ -8,6 +8,10 @@
 
 Answers: *can this product claim X?* using packs on disk — never invents PASS.
 
+Universal claim↔evidence pattern for Agent Skills / MCP / ops products: refuse soak,
+“ready”, or audit language unless a sealed pack on disk supports it. First stand is
+crypto Market Radar; the graph model applies to any evidence-backed product family.
+
 ## Ecosystem E2E — 8 repositories
 
 End-to-end (2026-11-17): security-scan → skills-eval → evidence-graph → policy-gate → **PASS**.  
@@ -37,18 +41,29 @@ Dashboard: [`docs/assets/e2e-ecosystem-2026-11-17.png`](docs/assets/e2e-ecosyste
 | `l1_pin` | `Absolute_Blockchain_Ultimate` | [`dup-protocol`](https://github.com/Gruver87/dup-protocol) |
 | `l1_exp` | `Absolute_Blockchain_Experimental` | [`dup-protocol-experimental`](https://github.com/Gruver87/dup-protocol-experimental) |
 
+## Quick demo (fixtures — no Desktop)
+
+```bash
+git clone https://github.com/Gruver87/dup-evidence-graph.git && cd dup-evidence-graph
+python -m pip install -e ".[dev]"
+make demo
+# or: python -m evidence_graph demo
+# Windows: .\scripts\demo.ps1
+```
+
+Expect: `ops_ready` allowed · `soak_48h` refused (`approx_48h_claim_ok=false`).
+
 ## Install
 
-```powershell
-cd C:\Users\vovun\Desktop\dup-evidence-graph
+```bash
 python -m pip install -e ".[dev]"
-.\scripts\test_all.ps1
-.\scripts\scan_desktop.ps1
+make test   # or: .\scripts\test_all.ps1
+# live Desktop scan (optional): .\scripts\scan_desktop.ps1
 ```
 
 ## Examples
 
-```powershell
+```bash
 python -m evidence_graph query radar soak_48h
 python -m evidence_graph query radar ops_ready
 python -m evidence_graph query bot entries_unlocked

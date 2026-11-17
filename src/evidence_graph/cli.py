@@ -64,7 +64,22 @@ def build_parser() -> argparse.ArgumentParser:
     board = sub.add_parser("board", help="Print honesty board (markdown to stdout)")
     _ = board
 
+    demo = sub.add_parser(
+        "demo",
+        help="Run against packaged fixtures (no Desktop / no live keys)",
+    )
+    demo.add_argument(
+        "--out",
+        type=Path,
+        default=Path("out/demo"),
+        help="Export dir (default: out/demo)",
+    )
+
     return p
+
+
+def _fixtures_config() -> Path:
+    return Path(__file__).resolve().parents[2] / "tests" / "fixtures" / "products.json"
 
 
 def _load_graph(args: argparse.Namespace) -> EvidenceGraph:
@@ -75,6 +90,32 @@ def _load_graph(args: argparse.Namespace) -> EvidenceGraph:
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
+
+    if args.cmd == "demo":
+        cfg_path = _fixtures_config()
+        if not cfg_path.is_file():
+            print(f"FAIL: demo fixtures missing: {cfg_path}", file=sys.stderr)
+            return 2
+        cfg, packs = scan_products(config_path=cfg_path)
+        graph = EvidenceGraph(config=cfg, packs=packs)
+        print(
+            f"evidence_graph DEMO packs={len(graph.packs)} "
+            f"nodes={len(graph.nodes)} (fixtures — not live Desktop)"
+        )
+        for product in graph.config.get("products") or []:
+            pid = product["id"]
+            n = len(graph.packs_for(pid))
+            print(f" - {pid}: packs={n} root_ok={product.get('_root_exists')}")
+        v_ops = graph.can_claim("radar", "ops_ready")
+        v_48 = graph.can_claim("radar", "soak_48h")
+        print(f"query radar ops_ready → allowed={v_ops.allowed}")
+        print(f"query radar soak_48h → allowed={v_48.allowed} (expect False)")
+        write_json(graph, args.out / "graph.json")
+        write_markdown(graph, args.out / "board.md")
+        print(f"exported → {args.out.resolve()}")
+        # Fail-closed demo succeeds when ops_ready true and soak refused
+        return 0 if v_ops.allowed and not v_48.allowed else 1
+
     graph = _load_graph(args)
 
     if args.cmd == "scan":
