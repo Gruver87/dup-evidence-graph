@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "products": [
+    {
+      "id": "radar",
+      "name": "Fixture Radar",
+      "repo": "Gruver87/dup-market-radar",
+      "default_root": "radar_root",
+      "family": "radar",
+      "scan": {
+        "run_dirs": ["docs/evidence/runs"],
+        "json_globs": [
+          "data/evidence/LATEST_SOAK.json",
+          "data/evidence/READY_OPS.json"
+        ]
+      },
+      "claims": ["ops_ready", "short_soak", "soak_48h", "verify_full"]
+    },
+    {
+      "id": "bot",
+      "name": "Fixture Bot",
+      "repo": "Gruver87/absolute-trading-bot-final",
+      "default_root": "bot_root",
+      "family": "bot",
+      "scan": {
+        "run_dirs": [],
+        "json_globs": ["docs/PROTOCOL_STATUS.md"]
+      },
+      "claims": ["protocol_status", "entries_unlocked"]
+    }
+  ],
+  "boundaries": [
+    { "from_family": "radar", "to_family": "l1", "rule": "forbid_claim_transfer" }
+  ]
+}

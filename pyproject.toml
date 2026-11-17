@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dup-evidence-graph"
+version = "0.1.0"
+description = "Queryable evidence graph for DUP Labs packs (radar / bot / L1 / skills)"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+authors = [{ name = "Uladzimir Dabranski" }]
+keywords = ["evidence", "fail-closed", "dup-labs", "soak", "honesty"]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.8"]
+
+[project.scripts]
+dup-evidence-graph = "evidence_graph.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/Gruver87/dup-evidence-graph"
+Repository = "https://github.com/Gruver87/dup-evidence-graph"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+src = ["src", "tests", "scripts"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

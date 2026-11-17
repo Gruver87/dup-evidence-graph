@@ -1,0 +1,13 @@
+{
+  "product": "Fixture Radar",
+  "run_id": "20261117T184941Z-verify-full-0.2.89",
+  "status": "ok",
+  "files": [
+    {
+      "name": "LATEST_SOAK.json",
+      "hard_fails": 0,
+      "approx_48h_claim_ok": false,
+      "pack_kind": "soak_lab"
+    }
+  ]
+}

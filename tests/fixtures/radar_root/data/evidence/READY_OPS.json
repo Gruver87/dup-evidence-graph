@@ -1,0 +1,7 @@
+{
+  "product": "Fixture Radar",
+  "pack_kind": "ops_ready",
+  "ops_ready": true,
+  "short_soak_hard_fails": 0,
+  "approx_48h_claim_ok": false
+}

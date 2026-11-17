@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "note": "Paths are relative to Desktop or absolute. Cross-product claims are never transferable.",
+  "products": [
+    {
+      "id": "radar",
+      "name": "DUP Market Radar",
+      "repo": "Gruver87/dup-market-radar",
+      "default_root": "../dup-market-radar",
+      "family": "radar",
+      "scan": {
+        "run_dirs": ["docs/evidence/runs"],
+        "json_globs": [
+          "data/evidence/LATEST.json",
+          "data/evidence/LATEST_SOAK.json",
+          "data/evidence/READY_OPS.json",
+          "data/evidence/soak_lab_*.json",
+          "data/evidence/smoke_live_*.json"
+        ]
+      },
+      "claims": ["unit", "verify_quick", "verify_full", "ops_ready", "short_soak", "soak_48h", "live_preflight"]
+    },
+    {
+      "id": "bot",
+      "name": "absolute-trading-bot-final",
+      "repo": "Gruver87/absolute-trading-bot-final",
+      "default_root": "../absolute-trading-bot-final",
+      "family": "bot",
+      "scan": {
+        "run_dirs": ["docs/evidence/runs"],
+        "json_globs": ["docs/PROTOCOL_STATUS.md"]
+      },
+      "claims": ["protocol_status", "entries_unlocked"]
+    },
+    {
+      "id": "skills",
+      "name": "dup-agent-skills",
+      "repo": "Gruver87/dup-agent-skills",
+      "default_root": "../dup-agent-skills",
+      "family": "skills",
+      "scan": {
+        "run_dirs": [],
+        "json_globs": ["plugin.json"]
+      },
+      "claims": ["skills_ci"]
+    },
+    {
+      "id": "l1_pin",
+      "name": "DUP Protocol (industrial pin)",
+      "repo": "Gruver87/dup-protocol",
+      "default_root": "../Absolute_Blockchain_Ultimate",
+      "family": "l1",
+      "scan": {
+        "run_dirs": ["docs/evidence/runs", "docs/packs"],
+        "json_globs": ["docs/EVIDENCE_MATRIX.md"]
+      },
+      "claims": ["mesh_probe", "industrial_gate", "soak_48h"]
+    },
+    {
+      "id": "l1_exp",
+      "name": "DUP Protocol Experimental",
+      "repo": "Gruver87/dup-protocol-experimental",
+      "default_root": "../Absolute_Blockchain_Experimental",
+      "family": "l1",
+      "scan": {
+        "run_dirs": ["docs/evidence/runs", "docs/packs"],
+        "json_globs": ["docs/EVIDENCE_MATRIX.md"]
+      },
+      "claims": ["lab", "mesh_probe"]
+    }
+  ],
+  "boundaries": [
+    { "from_family": "radar", "to_family": "l1", "rule": "forbid_claim_transfer" },
+    { "from_family": "l1", "to_family": "radar", "rule": "forbid_claim_transfer" },
+    { "from_family": "bot", "to_family": "radar", "rule": "forbid_claim_transfer" },
+    { "from_family": "bot", "to_family": "l1", "rule": "forbid_claim_transfer" }
+  ]
+}
